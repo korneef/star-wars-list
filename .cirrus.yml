@@ -1,11 +1,11 @@
 container:
-  image: node:latest
+  image: node:18.17.1
 
 deploy_task:
   only_if: $CIRRUS_BRANCH == 'main'
   node_modules_cache:
     folder: node_modules
-    ingerprint_script: cat package-lock.json
+    ingerprint_script: cat package.json
     populate_script: npm ci
   env:
     GITHUB_TOKEN: ENCRYPTED[!161ff254c5720102623a83563b4a196e3566acc5de6c172a1383f5cf6f218a035beedec2ee3b5c2c6843625f2a073c7c!]
