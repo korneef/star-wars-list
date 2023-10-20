@@ -1,0 +1,26 @@
+@import "shared/assets/styles/colorVariables.scss";
+
+.button {
+  display: inline-block;
+  box-sizing: border-box;
+  height: 40px;
+  max-height: 40px;
+  min-height: 40px;
+
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  background-color: $yellowBackground;
+  cursor: pointer;
+  &:hover {
+    background-color: #fcd273;
+  }
+
+  &_disabled {
+    background-color: #a2a2a2;
+    &:hover {
+      background-color: #a2a2a2;
+      cursor: default;
+    }
+  }
+}

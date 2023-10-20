@@ -1,0 +1,48 @@
+.search-person-widget {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding: 15px;
+  box-sizing: border-box;
+
+  &__input {
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 0 15px;
+    height: 30px;
+    width: 300px;
+    box-sizing: border-box;
+    &:active, &:focus {
+      outline: none;
+    }
+  }
+
+  &__persons-list {
+    width: 300px;
+    padding: 0;
+    background-color: white;
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 50%;
+    transform: translate(-50%, 0%);
+    border-radius: 5px;
+    box-sizing: border-box;
+
+  }
+  &__persons-list-item {
+    border: 1px solid black;
+    border-top: none;
+    padding: 10px;
+    cursor: pointer;
+    &:first-child {
+      border: 1px solid black;
+      border-radius: 10px 10px 0 0;
+    }
+    &:last-child {
+      border-radius: 0 0 10px 10px;
+    }
+    &:hover {
+      background-color: #93a3f8;
+    }
+  }
+}
