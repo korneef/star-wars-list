@@ -1,5 +1,6 @@
 {
   "name": "star-wars-list",
+  "homepage": "https://korneef.github.io/star-wars-list/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
