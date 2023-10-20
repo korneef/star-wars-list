@@ -1,4 +1,5 @@
 export type TPerson = {
+  [key: string]: any;
   "name": string,
   "height": string,
   "mass": string,

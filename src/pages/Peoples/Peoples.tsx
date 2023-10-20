@@ -5,6 +5,7 @@ import {
   TableRow,
   Button,
   Spinner,
+  PageWrapper,
   baseUrl
 } from 'shared'
 import { SearchPersonWidget } from 'widgets'
@@ -64,41 +65,46 @@ const Peoples: React.FunctionComponent = () => {
   const className = 'peoples';
 
   return (
-    isLoading && isFirstLoading
-      ? <div className={`${className}__loader`}><Spinner/></div>
-      : (
-        <div className={ className }>
-          <SearchPersonWidget/>
-          <Table
-            headerCellsNames={ [
-              'name',
-              'height',
-              'mass',
-              'hair_color',
-              'add to favorite'
-            ] }
-            rows={ peoples.map(item => <TableRow key={ item.name } cells={ [
-              item.name,
-              item.height,
-              item.mass,
-              item.hair_color,
-              favoriteButton(item),
-            ] }/>) }
-          />
-          <div className={ `${ className }__table-pagination` }>
-            <div className={ `${ className }__pages-count-info` }>
-              <div className={ `${ className }__current-page` }>Текущая страница: { page ? page : 1 }</div>
-              <div className={ `${ className }__pages-count` }>Всего
-                страниц: { data?.count && Math.ceil((data?.count || 10) / 10) }</div>
+    <PageWrapper>
+      { isLoading && isFirstLoading
+        ? <div className={ `${ className }__loader` }><Spinner/></div>
+        : (
+          <div className={ className }>
+            <SearchPersonWidget/>
+            <Table
+              headerCellsNames={ [
+                'name',
+                'height',
+                'mass',
+                'hair_color',
+                'add to favorite'
+              ] }
+              rows={ peoples.map(item => <TableRow key={ item.name } cells={ [
+                item.name,
+                item.height,
+                item.mass,
+                item.hair_color,
+                favoriteButton(item),
+              ] }/>) }
+            />
+            <div className={ `${ className }__table-pagination` }>
+              <div className={ `${ className }__pages-count-info` }>
+                <div className={ `${ className }__current-page` }>Текущая страница: { page ? page : 1 }</div>
+                <div className={ `${ className }__pages-count` }>Всего
+                  страниц: { data?.count && Math.ceil((data?.count || 10) / 10) }</div>
+              </div>
+              <div>
+                { data?.previous &&
+                  <Button bemClass={ className } disabled={ isLoading }
+                          onClick={ () => handlePage(data?.previous) }>Назад</Button> }
+                { data?.next &&
+                  <Button bemClass={ className } disabled={ isLoading }
+                          onClick={ () => handlePage(data?.next) }>Вперед</Button> }</div>
             </div>
-            <div>
-              { data?.previous &&
-                <Button bemClass={ className } disabled={isLoading} onClick={ () => handlePage(data?.previous) }>Назад</Button> }
-              { data?.next &&
-                <Button bemClass={ className } disabled={isLoading} onClick={ () => handlePage(data?.next) }>Вперед</Button> }</div>
           </div>
-        </div>
-      )
+        ) }
+    </PageWrapper>
+
   )
 }
 
