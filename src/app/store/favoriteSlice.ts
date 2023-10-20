@@ -39,7 +39,4 @@ export const {
   removeFavoritePerson,
 } = favoriteSlice.actions
 
-// Other code such as selectors can use the imported `RootState` type
-export const selectCount = (state: RootState) => state.favorites.favorites;
-
 export default favoriteSlice.reducer

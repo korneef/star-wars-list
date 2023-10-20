@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import useGetData from '../../customHooks/useGetData';
 import { Tpeople } from '../../models/peopleModel';
 import './SearchPersonWidget.scss';

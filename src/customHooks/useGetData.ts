@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-function useGetData<T>(query: string, debounce?: boolean) {
+function useGetData<T>(query: string) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [data, setData] = useState<T | null>(null);
   const [isError, setIsError] = useState<boolean>(false);
