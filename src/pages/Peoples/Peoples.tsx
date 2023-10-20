@@ -11,7 +11,9 @@ import { SearchPersonWidget } from 'widgets'
 import useGetData from '../../customHooks/useGetData';
 import { type Tpeople } from '../../models/peopleModel';
 import { useNavigate, useParams } from 'react-router-dom';
-import './Peoples.scss'
+import './Peoples.scss';
+import { useAppDispatch, useAppSelector } from '../../app/store/hooks';
+import { addFavoritePerson, removeFavoritePerson } from '../../app/store/favoriteSlice';
 
 
 const Peoples: React.FunctionComponent = () => {
@@ -24,6 +26,8 @@ const Peoples: React.FunctionComponent = () => {
   const [peoples, setPeoples] = useState<Array<TPerson>>([]);
   const {data, isLoading, isError} = useGetData<Tpeople>(query);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch()
+  const favorites = useAppSelector(state => state.favorites.favorites)
 
   useEffect(() => {
     if (data === null || isError) return
@@ -42,7 +46,22 @@ const Peoples: React.FunctionComponent = () => {
     setQuery(newQuery)
   }
 
-  const className = 'peoples'
+  const addToFavorites = (item: TPerson) => {
+    dispatch(addFavoritePerson(item))
+  }
+  const removeFromFavorites = (item: TPerson) => {
+    dispatch(removeFavoritePerson(item))
+  }
+
+  const favoriteButton = (item: TPerson) => {
+    if (!favorites.find(favItem => favItem.name === item.name)) {
+      return <Button onClick={ () => addToFavorites(item) }>Добавить в избранное</Button>
+    } else {
+      return <Button onClick={ () => removeFromFavorites(item) }>Удалить из избранного</Button>
+    }
+  }
+
+  const className = 'peoples';
 
   return (
     isLoading && isFirstLoading
@@ -63,7 +82,7 @@ const Peoples: React.FunctionComponent = () => {
               item.height,
               item.mass,
               item.hair_color,
-              'add'
+              favoriteButton(item),
             ] }/>) }
           />
           <div className={ `${ className }__table-pagination` }>

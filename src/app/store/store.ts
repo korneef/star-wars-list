@@ -1,10 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import favoriteReducer from './favoriteSlice';
+import localStorageMiddleware from './localStorageMiddleware';
+
 
 export const store = configureStore({
   reducer: {
-    favorits: favoriteReducer,
+    favorites: favoriteReducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(localStorageMiddleware),
+
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
