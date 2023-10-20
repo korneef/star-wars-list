@@ -31,8 +31,8 @@ const Peoples: React.FunctionComponent = () => {
     setIsFirstLoading(false)
   }, [data, isError])
 
-  const handlePage = (changePageQuery: string | null) => {
-    if (changePageQuery === null) return;
+  const handlePage = (changePageQuery: string | null | undefined) => {
+    if (!changePageQuery) return;
     const regex = /api\/people\/\?page=(\d+)/;
     const match = changePageQuery.match(regex);
     if (!match) return;
@@ -46,7 +46,7 @@ const Peoples: React.FunctionComponent = () => {
 
   return (
     isLoading && isFirstLoading
-      ? <div>Loading...</div>
+      ? <div className={`${className}__loader`}><Spinner/></div>
       : (
         <div className={ className }>
           <SearchPersonWidget/>
@@ -70,13 +70,13 @@ const Peoples: React.FunctionComponent = () => {
             <div className={ `${ className }__pages-count-info` }>
               <div className={ `${ className }__current-page` }>Текущая страница: { page ? page : 1 }</div>
               <div className={ `${ className }__pages-count` }>Всего
-                страниц: { data?.count && Math.ceil(data.count / 10) }</div>
+                страниц: { data?.count && Math.ceil((data?.count || 10) / 10) }</div>
             </div>
             <div>
               { data?.previous &&
-                <Button bemClass={ className } disabled={isLoading} onClick={ () => handlePage(data.previous) }>Назад</Button> }
+                <Button bemClass={ className } disabled={isLoading} onClick={ () => handlePage(data?.previous) }>Назад</Button> }
               { data?.next &&
-                <Button bemClass={ className } disabled={isLoading} onClick={ () => handlePage(data.next) }>Вперед</Button> }</div>
+                <Button bemClass={ className } disabled={isLoading} onClick={ () => handlePage(data?.next) }>Вперед</Button> }</div>
           </div>
         </div>
       )
