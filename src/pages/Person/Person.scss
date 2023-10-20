@@ -1,0 +1,14 @@
+.person-page {
+  &__loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+  }
+  &__button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0
+  }
+}

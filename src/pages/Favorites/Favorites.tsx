@@ -14,7 +14,7 @@ function Favorites() {
           'height',
           'mass',
           'hair_color',
-          'add to favorite'
+          'remove from favorite'
         ] }
                rows={ favorites.map(item => <TableRow key={ item.name } cells={
                  [

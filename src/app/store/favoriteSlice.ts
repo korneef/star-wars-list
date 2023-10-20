@@ -7,7 +7,6 @@ import type { TPerson } from '../../models/presonModel';
 interface favorites {
   favorites: Array<TPerson>
 }
-console.log(localStorage.getItem('favorites'))
 const getFavoritesFromLocalStorage = (): TPerson[] => {
   const favorites = localStorage.getItem('favorites')
   if (favorites !== null) return JSON.parse(favorites)

@@ -38,8 +38,7 @@ const Peoples: React.FunctionComponent = () => {
 
   const handlePage = (changePageQuery: string | null | undefined) => {
     if (!changePageQuery) return;
-    const regex = /api\/people\/\?page=(\d+)/;
-    const match = changePageQuery.match(regex);
+    const match = changePageQuery.match(/api\/people\/\?page=(\d+)/);
     if (!match) return;
     const pageNumber = match[1]
     const newQuery = `${ baseUrl }?page=${ pageNumber }`

@@ -1,0 +1,12 @@
+.home-page {
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+  &__link {
+    font-size: 20px;
+    display: block;
+    &:first-child {
+      margin-right: 10px;
+    }
+  }
+}
