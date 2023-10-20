@@ -1,3 +1,5 @@
+[![Build Status](https://api.cirrus-ci.com/github/korneef/star-wars-list.svg?branch=main)](https://cirrus-ci.com/github/korneef/star-wars-list)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

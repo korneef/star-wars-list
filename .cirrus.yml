@@ -1,0 +1,18 @@
+container:
+  image: node:latest
+
+deploy_task:
+  only_if: $CIRRUS_BRANCH == 'main'
+  node_modules_cache:
+    folder: node_modules
+    ingerprint_script: cat package-lock.json
+    populate_script: npm ci
+  env:
+    GITHUB_TOKEN: ENCRYPTED[!161ff254c5720102623a83563b4a196e3566acc5de6c172a1383f5cf6f218a035beedec2ee3b5c2c6843625f2a073c7c!]
+    USER: korneef
+    REPO: star-wars-listпше
+  deploy_script:
+    - git config --global user.name "Cirrus-CI"
+    - git config --global user.email "ci@cirruslabs.org"
+    - git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/$USER/$REPO
+    - npm run build && npx push-dir --dir=build --branch=gh-pages --force --verbose
