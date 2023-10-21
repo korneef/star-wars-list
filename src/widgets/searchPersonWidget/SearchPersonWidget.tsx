@@ -68,7 +68,7 @@ function SearchPersonWidget() {
             className={ `${ className }__persons-list-item` }
           >
             { <Link className={ `${ className }__persons-list-item-link` }
-                    to={ getPersonId(item.url) }>{ item.name }</Link> }
+                    to={ `/peoples/${ getPersonId(item.url) }` }>{ item.name }</Link> }
           </li>) }
         </ul>
         <div className={ `${ className }__persons-button-wrapper` }>{ data.previous &&
