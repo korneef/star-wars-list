@@ -6,11 +6,13 @@
   height: 40px;
   max-height: 40px;
   min-height: 40px;
+  position: relative;
 
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
   background-color: $yellowBackground;
+  color: #000000;
   cursor: pointer;
   &:hover {
     background-color: #fcd273;
@@ -23,4 +25,32 @@
       cursor: default;
     }
   }
+
+  &_loading {
+    color: rgba(0, 0, 0, 0)
+  }
+
+  &__loader-wrapper {
+    width: 25px;
+    height: 25px;
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__loader {
+    width: 100%;
+    height: 100%;
+    border: 3px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+
+  }
+
 }
