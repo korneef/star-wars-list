@@ -3,7 +3,7 @@ import useGetData from '../../customHooks/useGetData';
 import { Tpeople } from '../../models/peopleModel';
 import './SearchPersonWidget.scss';
 import { Link } from 'react-router-dom';
-import { Button } from 'shared';
+import { Button, Spinner } from 'shared';
 
 function SearchPersonWidget() {
   const [personSearchStr, setPersonSearchStr] = useState({
@@ -73,33 +73,40 @@ function SearchPersonWidget() {
         onChange={ (event) => handleChange(event.target.value) }
         onFocus={ () => handleFocus(true) }
       />
-      { isFocus && data && <div
+      { isFocus && (data || isLoading) && <div
         className={ `${ className }__persons-list-wrapper` }
       >
-        <ul className={ `${ className }__persons-list` }>
-          { data?.results && data.results.map(item => <li
-            key={ item.name }
-            className={ `${ className }__persons-list-item` }
-          >
-            { <Link className={ `${ className }__persons-list-item-link` }
-                    to={ `/peoples/${ getPersonId(item.url) }` }>{ item.name }</Link> }
-          </li>) }
-        </ul>
-        {(data.next || data.previous) && <div className={ `${ className }__persons-button-wrapper` }>{ data.previous &&
-          <Button
-            onClick={ () => searchPageChange(data.previous) }
-            disabled={ isLoading }
-          >
-            Назад
-          </Button> }
-          { data.next &&
+        { isLoading && !data && <div className={ `${ className }__spinner-wrapper` }><Spinner/></div> }
+        { data?.results.length === 0 ?
+          <div className={`${className}__no-data-panel`}>No data</div> :
+          <ul className={ `${ className }__persons-list` }>
+            { data?.results && data.results.map(item =>
+              <li
+                key={ item.name }
+                className={ `${ className }__persons-list-item` }
+              >
+                { <Link className={ `${ className }__persons-list-item-link` }
+                        to={ `/peoples/${ getPersonId(item.url) }` }>{ item.name }</Link> }
+              </li>) }
+          </ul>
+        }
+
+        { data && (data.next || data.previous) &&
+          <div className={ `${ className }__persons-button-wrapper` }>{ data.previous &&
             <Button
-              onClick={ () => searchPageChange(data.next) }
+              onClick={ () => searchPageChange(data.previous) }
               disabled={ isLoading }
             >
-              Вперед
+              Назад
             </Button> }
-        </div> }
+            { data.next &&
+              <Button
+                onClick={ () => searchPageChange(data.next) }
+                disabled={ isLoading }
+              >
+                Вперед
+              </Button> }
+          </div> }
       </div> }
     </div>
   );

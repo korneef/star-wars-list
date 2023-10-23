@@ -69,4 +69,15 @@
       margin-left: 5px;
     }
   }
+
+  &__no-data-panel {
+    padding: 10px;
+  }
+
+  &__spinner-wrapper {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
